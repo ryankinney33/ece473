@@ -64,10 +64,9 @@ for instr in machineCode:
             # loading instructions have strange format
             assemblyCode[line_counter]+= mne+" "+rt+" "+str(offset)+"("+rs+")"
         elif mne[0]=="b":
-            # branch instructions use labels
-            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+" L"+str(label_counter)
-            
-            # first, add lines before the first line or after the last line
+            # branch instructions use labels, create or copy the necessary label
+            label = "" # dummy variable to hold the label
+            # first, add lines before the first line or after the last line if applicable
             label_line = offset+line_counter+1 # the line that requires a label
             
             for i in range(label_line,0): # adds items to the start of the list
@@ -76,15 +75,20 @@ for instr in machineCode:
             if label_line < 0:
                 label_line = 0
 
-            # adds items to the end of the list
-            for i in range(line_counter,label_line+1):
+            for i in range(line_counter,label_line+1): # adds items to the end of the list
                 assemblyCode.append("\t")
  
-            # finally, add the label
-            assemblyCode[label_line] = "L"+str(label_counter)+":"+assemblyCode[label_line]
-            label_counter+=1
+            # now create/copy the label
+            if assemblyCode[label_line][0] != "L": # line does not have a label, add one
+                label = "L"+str(label_counter)
+                assemblyCode[label_line] = label+":"+assemblyCode[label_line]
+                label_counter+=1
+            else:
+                label = assemblyCode[label_line].partition(":")[0]
+            # finally, write the assembly instruction
+            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+", "+label
         else:
-            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+" "+str(offset)
+            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+", "+str(offset)
     line_counter += 1
 
 # print the contents, one member per line
