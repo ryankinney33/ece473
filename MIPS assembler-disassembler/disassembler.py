@@ -88,7 +88,7 @@ for instr in machineCode:
             offset = -((offset ^ 0xFFFF)+1)
         if mne[0]=="l":
             # loading instructions have strange format
-            assemblyCode[line_counter]+= mne+"\t"+rt+" "+str(offset)+"("+rs+")"
+            assemblyCode[line_counter]+= mne+"\t"+rt+", "+str(offset)+"("+rs+")"
         elif mne[0]=="b":
             # branch instructions use labels, create or copy the necessary label
             label = "" # dummy variable to hold the label
