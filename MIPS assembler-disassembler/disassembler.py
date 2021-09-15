@@ -20,12 +20,21 @@ functDict = {0:"sll", 2:"srl", 3:"sra", 4:"sllv", 6:"srlv", 7:"srav", \
              42:"slt", 43:"sltu",\
              48:"tge", 49:"tgeu", 50:"tlt", 51:"tltu", 52:"teg", 54:"tne"}
 
+# for getting the names of the registers
+regD = {0:"$zero", 1:"$at", 2:"$v0", 3:"$v1", 4:"$a0", 5:"$a1", 6:"$a2", 7:"a3",\
+      8:"$t0", 9:"$t1", 10:"$t2", 11:"$t3", 12:"$t4", 13:"$t5", 14:"$t6", 15:"$t7",\
+      16:"$s0", 17:"$s1", 18:"$s2", 19:"$s3", 20:"$s4", 21:"$s5", 22:"$s6", 23:"$s7",\
+      24:"$t8", 25:"$t9", 26:"$k0", 27:"$k1", 28:"$gp", 29:"$sp", 30:"$fp", 31:"$ra"}
+
 # holds the assembly instructions
 assemblyCode = []
 
 # for files that have 1 instruction per line, binary with 1's and 0's in ascii
 line_counter = 0
 label_counter = 0
+
+PC = 0x00400000 # program counter, pretend the first instruction here is at address 0x00400000
+
 for instr in machineCode:
     # add a line to the list if need be
     if len(assemblyCode) <= line_counter:
@@ -35,34 +44,51 @@ for instr in machineCode:
     op = opCodeDict[int(instr[0:6],base=2)]
 
     # decode the instruction based on the op-code
-    if op == "R-format":
-        # r-format, extract registers
+    if op == "R-format": # r-format
         funct = int(instr[-7:],base=2)
         mne = functDict[funct]
-        rs = "$"+ str(int(instr[6:11],base=2))
-        rt = "$"+ str(int(instr[11:16],base=2))
-        rd = "$"+ str(int(instr[16:21],base=2))
+        rs = regD[int(instr[6:11],base=2)]
+        rt = regD[int(instr[11:16],base=2)]
+        rd = regD[int(instr[16:21],base=2)]
         shamt = int(instr[21:26])
-        assemblyCode[line_counter]+= mne+" "+rd+", "+rs+", "+rt
+        assemblyCode[line_counter]+= mne+"\t"+rd+", "+rs+", "+rt
+    elif op[0]=="j": # j-format
+        address = int(instr[6:],base=2)
+        address = (PC & 0xC0000000)|(address<<2) # address should be: 2 most significant bits of PC, 26 bits from the instruction, then two zeros
+        
+        # find the line offset
+        offset = int((address-PC)/4)
+        label_line = line_counter+offset
+        for i in range(label_line,0): # adds items to the start of the list
+            assemblyCode.insert(0,"\t")
+            line_counter+=1 # update the line number
+        if label_line < 0:
+            label_line = 0
 
-    elif op[0]=="j":
-        # j-format, extract stuffs
-        assemblyCode[line_counter]+= op+" label"
+        for i in range(line_counter,label_line+1): # adds items to the end of the list
+            assemblyCode.append("\t")
+ 
+        # now create/copy the label
+        if assemblyCode[label_line][0] != "L": # line does not have a label, add one
+            label = "L"+str(label_counter)
+            assemblyCode[label_line] = label+":"+assemblyCode[label_line]
+            label_counter+=1
+        else:
+            label = assemblyCode[label_line].partition(":")[0]
+        assemblyCode[line_counter] += op+"\t"+label
 
-    else:
-        # i-format, extract stuffs
+    else: # i-format
         mne = op
-        rs = "$"+ str(int(instr[6:11],base=2))
-        rt = "$"+ str(int(instr[11:16],base=2))
+        rs = regD[int(instr[6:11],base=2)]
+        rt = regD[int(instr[11:16],base=2)]
         offset = int(instr[16:],base=2)
         
         # offset is a 16-bit two's complement number
         if offset > 0x7FFF:
             offset = -((offset ^ 0xFFFF)+1)
-        
         if mne[0]=="l":
             # loading instructions have strange format
-            assemblyCode[line_counter]+= mne+" "+rt+" "+str(offset)+"("+rs+")"
+            assemblyCode[line_counter]+= mne+"\t"+rt+" "+str(offset)+"("+rs+")"
         elif mne[0]=="b":
             # branch instructions use labels, create or copy the necessary label
             label = "" # dummy variable to hold the label
@@ -86,10 +112,13 @@ for instr in machineCode:
             else:
                 label = assemblyCode[label_line].partition(":")[0]
             # finally, write the assembly instruction
-            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+", "+label
+            assemblyCode[line_counter]+= mne+"\t"+rt+", "+rs+", "+label
         else:
-            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+", "+str(offset)
+            assemblyCode[line_counter]+= mne+"\t"+rt+", "+rs+", "+str(offset)
+    
+    # increment the line counters
     line_counter += 1
+    PC += 4
 
 # print the contents, one member per line
 for line in assemblyCode:
