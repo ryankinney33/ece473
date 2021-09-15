@@ -22,15 +22,18 @@ functDict = {0:"sll", 2:"srl", 3:"sra", 4:"sllv", 6:"srlv", 7:"srav", \
 
 # holds the assembly instructions
 assemblyCode = []
+total_lines = 0
 for i in machineCode:
-    assemblyCode.append("")
+    assemblyCode.append("\t")
+    total_lines += 1
 machineCode.close()
+machineCode = open("binary.txt","r")
 
 # for files that have 1 instruction per line, binary with 1's and 0's in ascii
-counter = 0
+line_counter = 0
+label_counter = 0
 for instr in machineCode:
     # extract the instruction
-    assemblyCode.append("")
     op = opCodeDict[int(instr[0:6],base=2)]
     if op == "R-format":
         # r-format, extract registers
@@ -40,26 +43,37 @@ for instr in machineCode:
         rt = "$"+ str(int(instr[11:16],base=2))
         rd = "$"+ str(int(instr[16:21],base=2))
         shamt = int(instr[21:26])
-        assemblyCode[counter]+= mne+" "+rd+", "+rs+", "+rt
+        assemblyCode[line_counter]+= mne+" "+rd+", "+rs+", "+rt
     elif op[0]=="j":
         # j-format, extract stuffs
-        assemblyCode[counter]+= op+" label"
+        assemblyCode[line_counter]+= op+" label"
     else:
         # i-format, extract stuffs
         mne = op
         rs = "$"+ str(int(instr[6:11],base=2))
         rt = "$"+ str(int(instr[11:16],base=2))
-        offset = str(int(instr[16:],base=2))
+        offset = int(instr[16:],base=2)
+        
+        # offset is a 16-bit two's complement number
+        if offset > 0x7FFF:
+            offset = -((offset ^ 0xFFFF)+1)
         
         if mne[0]=="l":
             # loading instructions have strange format
-            assemblyCode[counter]+= mne+" "+rt+" "+offset+"("+rs+")"
+            assemblyCode[line_counter]+= mne+" "+rt+" "+str(offset)+"("+rs+")"
         elif mne[0]=="b":
             # branch instructions use labels
-            print("branch")
+            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+" L"+str(label_counter)
+            
+            # add a label at line_counter+offset+1
+            for i in range(total_lines, line_counter+offset+2):
+                assemblyCode.append("\t")
+            # finally, add the label
+            assemblyCode[line_counter+offset+1] = "L"+str(label_counter)+":"+assemblyCode[line_counter+offset+1]
+            
         else:
-            assemblyCode[counter]+= (mne+" "+rt+", "+rs)
-    counter += 1
+            assemblyCode[line_counter]+= mne+" "+rt+", "+rs+" "+str(offset)
+    line_counter += 1
 
 # print the contents, one member per line
 for line in assemblyCode:
