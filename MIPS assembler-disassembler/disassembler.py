@@ -22,19 +22,19 @@ functDict = {0:"sll", 2:"srl", 3:"sra", 4:"sllv", 6:"srlv", 7:"srav", \
 
 # holds the assembly instructions
 assemblyCode = []
-total_lines = 0
-for i in machineCode:
-    assemblyCode.append("\t")
-    total_lines += 1
-machineCode.close()
-machineCode = open("binary.txt","r")
 
 # for files that have 1 instruction per line, binary with 1's and 0's in ascii
 line_counter = 0
 label_counter = 0
 for instr in machineCode:
-    # extract the instruction
+    # add a line to the list if need be
+    if len(assemblyCode) <= line_counter:
+        assemblyCode.append("\t")
+
+    # extract the op-code
     op = opCodeDict[int(instr[0:6],base=2)]
+
+    # decode the instruction based on the op-code
     if op == "R-format":
         # r-format, extract registers
         funct = int(instr[-7:],base=2)
@@ -44,9 +44,11 @@ for instr in machineCode:
         rd = "$"+ str(int(instr[16:21],base=2))
         shamt = int(instr[21:26])
         assemblyCode[line_counter]+= mne+" "+rd+", "+rs+", "+rt
+
     elif op[0]=="j":
         # j-format, extract stuffs
         assemblyCode[line_counter]+= op+" label"
+
     else:
         # i-format, extract stuffs
         mne = op
@@ -65,12 +67,22 @@ for instr in machineCode:
             # branch instructions use labels
             assemblyCode[line_counter]+= mne+" "+rt+", "+rs+" L"+str(label_counter)
             
-            # add a label at line_counter+offset+1
-            for i in range(total_lines, line_counter+offset+2):
-                assemblyCode.append("\t")
-            # finally, add the label
-            assemblyCode[line_counter+offset+1] = "L"+str(label_counter)+":"+assemblyCode[line_counter+offset+1]
+            # first, add lines before the first line or after the last line
+            label_line = offset+line_counter+1 # the line that requires a label
             
+            for i in range(label_line,0): # adds items to the start of the list
+                assemblyCode.insert(0,"\t")
+                line_counter+=1 # update the line number
+            if label_line < 0:
+                label_line = 0
+
+            # adds items to the end of the list
+            for i in range(line_counter,label_line+1):
+                assemblyCode.append("\t")
+ 
+            # finally, add the label
+            assemblyCode[label_line] = "L"+str(label_counter)+":"+assemblyCode[label_line]
+            label_counter+=1
         else:
             assemblyCode[line_counter]+= mne+" "+rt+", "+rs+" "+str(offset)
     line_counter += 1
@@ -78,3 +90,5 @@ for instr in machineCode:
 # print the contents, one member per line
 for line in assemblyCode:
     print(line)
+
+machineCode.close()
