@@ -1,0 +1,11 @@
+// file: controller.v
+
+module controller(Reset, One, X0, CLK, WEN, SEL, FS);
+	input wire Reset;
+	input wire One;
+	input wire X0;
+	input wire CLK;
+	output reg WEN;
+	output reg SEL;
+	output reg [1:0] FS;
+endmodule
