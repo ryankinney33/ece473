@@ -1,6 +1,6 @@
 // file: controller.v
 
-module controller(reset, One, X0, CLK, WEN, SEL, FS);
+module controller(reset, One, X0, CLK, WEN, SEL, FS, STATE);
 	input wire reset;
 	input wire One;
 	input wire X0;
@@ -8,6 +8,7 @@ module controller(reset, One, X0, CLK, WEN, SEL, FS);
 	output reg WEN;
 	output reg SEL;
 	output reg [1:0] FS;
+	output reg [2:0] STATE;
 	
 	wire [2:0] Q;
 	reg [2:0] D;
@@ -19,17 +20,28 @@ module controller(reset, One, X0, CLK, WEN, SEL, FS);
 	
 	always @* begin
 		clr = !reset;
-		D[2] = (Q[1] && Q[0] && !reset) || (Q[1] && Q[0] && One && X0) || (!Q[2]&&!Q[1]&&!Q[0]&&!reset&&!One&&!X0);
+//		D[2] = (Q[1] && Q[0] && !reset) || (!Q[1] && !Q[0] && One && X0) || (!Q[2]&&!Q[1]&&!Q[0]&&!reset&&!One&&!X0);
+//		D[1] = (Q[1] && !Q[0] && !reset) || (!Q[0] && !reset && !One && X0);
+//		D[0] = (!Q[1] && Q[0] && !reset) || (Q[1] && !Q[0] && !reset) && (!Q[2] && !Q[1] && !reset && One);
+		
+		D[2] = (Q[1] && Q[0] && !reset) || (!Q[1] && !Q[0] && !reset && !X0);
 		D[1] = (Q[1] && !Q[0] && !reset) || (!Q[0] && !reset && !One && X0);
-		D[0] = (!Q[1] && Q[0] && !reset) || (Q[1] && !Q[0] && !reset) && (!Q[2] && !Q[1] && !reset && One);
+		D[0] = (!Q[1] && !reset && One) || (!Q[1] && Q[0] && !reset) || (Q[1] && !Q[0] && !reset);
+		
 		
 		SEL = !reset;
 		
 		WEN = !Q[1] && !reset && X0;
 		
-		FS[1] = (!Q[1] && Q[0]) || (!Q[1] && !Q[0] && One);
 		
-		FS[0] = (Q[1] && !Q[0]) || (!Q[0] && !One && X0);
+		
+//		WEN = !D[1] && !reset && X0;
+		
+//		FS[1] = (!D[1] && D[0]) || (!D[1] && !D[0] && One);
+		
+//		FS[0] = (D[1] && !D[0]) || (!D[0] && !One && X0);
+		
+		STATE = Q;
 	end
 	
 endmodule

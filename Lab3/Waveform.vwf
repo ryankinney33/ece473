@@ -1,8 +1,8 @@
 /*<simulation_settings>
-<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Ulam -c Ulam --vector_source="C:/Users/ryguy/Documents/Fate/Stay_Home/Unlimited_School_Works/ECE473/ece473/Lab3/Waveform.vwf" --testbench_file="C:/Users/ryguy/Documents/Fate/Stay_Home/Unlimited_School_Works/ECE473/ece473/Lab3/simulation/qsim/Waveform.vwf.vt"</ftestbench_cmd>
-<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Ulam -c Ulam --vector_source="C:/Users/ryguy/Documents/Fate/Stay_Home/Unlimited_School_Works/ECE473/ece473/Lab3/Waveform.vwf" --testbench_file="C:/Users/ryguy/Documents/Fate/Stay_Home/Unlimited_School_Works/ECE473/ece473/Lab3/simulation/qsim/Waveform.vwf.vt"</ttestbench_cmd>
-<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/Users/ryguy/Documents/Fate/Stay_Home/Unlimited_School_Works/ECE473/ece473/Lab3/simulation/qsim/" Ulam -c Ulam</fnetlist_cmd>
-<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/Users/ryguy/Documents/Fate/Stay_Home/Unlimited_School_Works/ECE473/ece473/Lab3/simulation/qsim/" Ulam -c Ulam</tnetlist_cmd>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Ulam -c Ulam --vector_source="D:/Documents/Fate/Stay Home/Unlimited Home Works/ECE473/ece473/Lab3/Waveform.vwf" --testbench_file="D:/Documents/Fate/Stay Home/Unlimited Home Works/ECE473/ece473/Lab3/simulation/qsim/Waveform.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Ulam -c Ulam --vector_source="D:/Documents/Fate/Stay Home/Unlimited Home Works/ECE473/ece473/Lab3/Waveform.vwf" --testbench_file="D:/Documents/Fate/Stay Home/Unlimited Home Works/ECE473/ece473/Lab3/simulation/qsim/Waveform.vwf.vt"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="D:/Documents/Fate/Stay Home/Unlimited Home Works/ECE473/ece473/Lab3/simulation/qsim/" Ulam -c Ulam</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="D:/Documents/Fate/Stay Home/Unlimited Home Works/ECE473/ece473/Lab3/simulation/qsim/" Ulam -c Ulam</tnetlist_cmd>
 <modelsim_script>onerror {exit -code 1}
 vlib work
 vlog -work work Ulam.vo
@@ -20,6 +20,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +39,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script_timing>
 <hdl_lang>verilog</hdl_lang>
 </simulation_settings>*/
@@ -116,7 +118,7 @@ SIGNAL("FS[0]")
 	PARENT = "FS";
 }
 
-SIGNAL("input")
+SIGNAL("in")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = BUS;
@@ -126,84 +128,84 @@ SIGNAL("input")
 	PARENT = "";
 }
 
-SIGNAL("input[7]")
+SIGNAL("in[7]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[6]")
+SIGNAL("in[6]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[5]")
+SIGNAL("in[5]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[4]")
+SIGNAL("in[4]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[3]")
+SIGNAL("in[3]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[2]")
+SIGNAL("in[2]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[1]")
+SIGNAL("in[1]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
-SIGNAL("input[0]")
+SIGNAL("in[0]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = INPUT;
-	PARENT = "input";
+	PARENT = "in";
 }
 
 SIGNAL("Reset")
@@ -326,6 +328,136 @@ SIGNAL("Z[0]")
 	PARENT = "Z";
 }
 
+SIGNAL("beans")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 8;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("beans[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("beans[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "beans";
+}
+
+SIGNAL("ST_C")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 3;
+	LSB_INDEX = 0;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("ST_C[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "ST_C";
+}
+
+SIGNAL("ST_C[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "ST_C";
+}
+
+SIGNAL("ST_C[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "ST_C";
+}
+
 TRANSITION_LIST("CLK")
 {
 	NODE
@@ -333,9 +465,9 @@ TRANSITION_LIST("CLK")
 		REPEAT = 1;
 		NODE
 		{
-			REPEAT = 10;
-			LEVEL 0 FOR 50.0;
-			LEVEL 1 FOR 50.0;
+			REPEAT = 25;
+			LEVEL 0 FOR 20.0;
+			LEVEL 1 FOR 20.0;
 		}
 	}
 }
@@ -358,7 +490,7 @@ TRANSITION_LIST("FS[0]")
 	}
 }
 
-TRANSITION_LIST("input[7]")
+TRANSITION_LIST("in[7]")
 {
 	NODE
 	{
@@ -367,7 +499,7 @@ TRANSITION_LIST("input[7]")
 	}
 }
 
-TRANSITION_LIST("input[6]")
+TRANSITION_LIST("in[6]")
 {
 	NODE
 	{
@@ -376,7 +508,7 @@ TRANSITION_LIST("input[6]")
 	}
 }
 
-TRANSITION_LIST("input[5]")
+TRANSITION_LIST("in[5]")
 {
 	NODE
 	{
@@ -385,7 +517,7 @@ TRANSITION_LIST("input[5]")
 	}
 }
 
-TRANSITION_LIST("input[4]")
+TRANSITION_LIST("in[4]")
 {
 	NODE
 	{
@@ -394,7 +526,7 @@ TRANSITION_LIST("input[4]")
 	}
 }
 
-TRANSITION_LIST("input[3]")
+TRANSITION_LIST("in[3]")
 {
 	NODE
 	{
@@ -403,7 +535,7 @@ TRANSITION_LIST("input[3]")
 	}
 }
 
-TRANSITION_LIST("input[2]")
+TRANSITION_LIST("in[2]")
 {
 	NODE
 	{
@@ -412,7 +544,7 @@ TRANSITION_LIST("input[2]")
 	}
 }
 
-TRANSITION_LIST("input[1]")
+TRANSITION_LIST("in[1]")
 {
 	NODE
 	{
@@ -421,7 +553,7 @@ TRANSITION_LIST("input[1]")
 	}
 }
 
-TRANSITION_LIST("input[0]")
+TRANSITION_LIST("in[0]")
 {
 	NODE
 	{
@@ -435,7 +567,8 @@ TRANSITION_LIST("Reset")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000.0;
+		LEVEL 1 FOR 120.0;
+		LEVEL 0 FOR 880.0;
 	}
 }
 
@@ -529,6 +662,105 @@ TRANSITION_LIST("Z[0]")
 	}
 }
 
+TRANSITION_LIST("beans[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("beans[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("ST_C[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("ST_C[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("ST_C[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "CLK";
@@ -570,7 +802,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input";
+	CHANNEL = "in";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 4;
@@ -580,7 +812,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[7]";
+	CHANNEL = "in[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 5;
@@ -590,7 +822,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[6]";
+	CHANNEL = "in[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 6;
@@ -600,7 +832,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[5]";
+	CHANNEL = "in[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 7;
@@ -610,7 +842,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[4]";
+	CHANNEL = "in[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 8;
@@ -620,7 +852,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[3]";
+	CHANNEL = "in[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 9;
@@ -630,7 +862,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[2]";
+	CHANNEL = "in[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 10;
@@ -640,7 +872,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[1]";
+	CHANNEL = "in[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 11;
@@ -650,7 +882,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "input[0]";
+	CHANNEL = "in[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 12;
@@ -662,7 +894,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "Reset";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Unsigned;
+	RADIX = Binary;
 	TREE_INDEX = 13;
 	TREE_LEVEL = 0;
 }
@@ -773,6 +1005,136 @@ DISPLAY_LINE
 	TREE_INDEX = 24;
 	TREE_LEVEL = 1;
 	PARENT = 16;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 25;
+	TREE_LEVEL = 0;
+	CHILDREN = 26, 27, 28, 29, 30, 31, 32, 33;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 26;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 27;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 28;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 29;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 30;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 31;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 32;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "beans[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 33;
+	TREE_LEVEL = 1;
+	PARENT = 25;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ST_C";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 34;
+	TREE_LEVEL = 0;
+	CHILDREN = 35, 36, 37;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ST_C[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 35;
+	TREE_LEVEL = 1;
+	PARENT = 34;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ST_C[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 36;
+	TREE_LEVEL = 1;
+	PARENT = 34;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "ST_C[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Unsigned;
+	TREE_INDEX = 37;
+	TREE_LEVEL = 1;
+	PARENT = 34;
 }
 
 TIME_BAR

@@ -480,4 +480,3 @@ set_global_assignment -name BDF_FILE Ulam.bdf
 set_global_assignment -name VERILOG_FILE controller.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
