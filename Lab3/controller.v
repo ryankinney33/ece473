@@ -17,16 +17,16 @@ module controller(reset, One, X0, CLK, WEN, SEL, FS);
 	
 	always @* begin
 		// decide what state to go to next
-		D[1] = !reset && !Q[0] && (!Q[1] && !One && X0 || Q[1]);
-		D[0] = !reset && (!Q[1] && !Q[0] && One || !Q[1] && Q[0] || Q[1] && !Q[0]);
+		D[1] = !Q[0] && (!Q[1] && !One && X0 || Q[1]);
+		D[0] = !Q[1] && !Q[0] && One || !Q[1] && Q[0] || Q[1] && !Q[0];
 		
 		SEL = !reset; // SEL line, determines whether or not to set register X to ALU output or the input
 
 		WEN = !reset && !Q[1] && !Q[0] && !One && X0; // tells whether or not to write into X
 		
 		// ALU control signals. Tells the ALU what operation to perform based on the current state and the inputs
-		FS[1] = !reset && (!Q[1] && !Q[0] && !One || Q[1] && Q[0]); 
-		FS[0] = !reset && !Q[0] && (!Q[1] && !One && X0 || Q[1]);
+		FS[1] = !Q[1] && !Q[0] && !One || Q[1] && Q[0]; 
+		FS[0] = !Q[0] && (!Q[1] && !One && X0 || Q[1]);
 	end
 	
 endmodule
