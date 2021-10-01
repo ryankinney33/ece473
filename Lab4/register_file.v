@@ -14,9 +14,10 @@ module register_file(
 	output reg [31:0] data_out_2,
 	output reg [31:0] data_out_debug);
 	
-	
+	// 32 32 bit registers
 	reg [31:0] Registers [0:31];
-	
+		
+	// handles writing/reset
 	always @(posedge clock or posedge reset) begin
 		if (reset) begin
 			// reset state; set register i to be equal to i
@@ -52,66 +53,20 @@ module register_file(
 			Registers[29] <= 32'd29;
 			Registers[30] <= 32'd30;
 			Registers[31] <= 32'd31;
-		end else if (WriteEnable) begin
-			// write into register
-			Registers[write_address] <= write_data_in;
+		end else begin
+			if (WriteEnable) begin
+				// write into register
+				Registers[write_address] <= write_data_in;
+			end
+			
+			// choose which register to read from based on the read_address inputs
+			data_out_1 <= Registers[read_address_1];
+			data_out_2 <= Registers[read_address_2];
 		end
-		
-		// read data out
-		data_out_1 <= Registers[read_address_1];
-		data_out_2 <= Registers[read_address_2];
 	end
-	
 	
 	always @(posedge clock_debug) begin
 		// debug mode; output the wanted register
 		data_out_debug <= Registers[read_address_debug];
-	end
-	
-	/*
-	reg [31:0] wen;
-	reg [31:0] register_data_out [0:31];
-	reg [4:0] idx;
-	reg [31:0] buffer;
-	
-	// instantiate the 32 registers
-	genvar i;
-	generate
-		for(i = 0; i < 32; i = i+1) begin : register_instantiate
-			register Registers (.data_in(buffer), .WriteEnable(wen[i]), .reset(reset), .clock(clock), .data_out(register_data_out[i]));
-		end
-	endgenerate	
-	
-	always @(posedge clock or posedge reset) begin
-		if (reset) begin
-			// reset, set the initial values. register 0 should be 0, 1 should be 1, 2 should be 2
-			if(idx < 5'd32) begin
-				wen <= 1'b0 << idx;
-				buffer <= idx;
-			end
-			
-		end else begin
-			if (WriteEnable) begin
-				wen <= 1'b0 << write_address;
-			end
-		end
-		
-		// read out the register output at the positive edge of the clock
-		data_out_1 <= register_data_out[read_address_1];
-		data_out_2 <= register_data_out[read_address_2];
-	end
-	
-	
-	always @(negedge reset) begin
-		idx <= 32'd0; // reset the idx
-	end
-	
-	always @(posedge clock_debug) begin
-		// debug stuffs, read the value when the debug clock is used
-		data_out_debug <= register_data_out[read_address_debug];
-	end
-	*/
-	
-	
-	
+	end	
 endmodule
