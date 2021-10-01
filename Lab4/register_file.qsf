@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CEBA4F23C7
-set_global_assignment -name TOP_LEVEL_ENTITY reg_file_test_sim
+set_global_assignment -name TOP_LEVEL_ENTITY lab4top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:27:54  SEPTEMBER 30, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
@@ -264,6 +264,13 @@ set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity D
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VERILOG_FILE VGA_Components/vram.v
+set_global_assignment -name VERILOG_FILE VGA_Components/vgaclk_0002.v
+set_global_assignment -name VERILOG_FILE VGA_Components/vgaclk.v
+set_global_assignment -name VERILOG_FILE VGA_Components/vga_control.v
+set_global_assignment -name VERILOG_FILE VGA_Components/color_encoder.v
+set_global_assignment -name VERILOG_FILE VGA_Components/char_engine.v
+set_global_assignment -name BDF_FILE VGA_Components/VGA_BLOCK.bdf
 set_global_assignment -name MIF_FILE datamem.mif
 set_global_assignment -name MIF_FILE ins.mif
 set_global_assignment -name VERILOG_FILE register_file.v

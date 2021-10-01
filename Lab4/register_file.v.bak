@@ -19,7 +19,7 @@ module register_file(
 		
 	// handles writing/reset
 	always @(posedge clock or posedge reset) begin
-		if (reset == 1'b1) begin
+		if (reset) begin
 			// reset state; set register i to be equal to i
 			Registers[0] <= 32'd0;
 			Registers[1] <= 32'd1;
@@ -54,12 +54,10 @@ module register_file(
 			Registers[30] <= 32'd30;
 			Registers[31] <= 32'd31;
 		end else begin
-			if (WriteEnable == 1'b1) begin
+			if (WriteEnable) begin
 				// write into register
 				Registers[write_address] <= write_data_in;
-			end /*else begin
-				Registers <= Registers;
-			end*/
+			end
 			
 			// choose which register to read from based on the read_address inputs
 			data_out_1 <= Registers[read_address_1];
