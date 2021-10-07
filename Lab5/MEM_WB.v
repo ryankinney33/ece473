@@ -7,5 +7,8 @@ module MEM_WB(
 	output reg [31:0] WB_D2,
 	output reg [4:0] WB_RD);
 
-
+	always @(negedge clock) begin
+		WB_D2 <= MEM_D2;
+		WB_RD <= MEM_RD;
+	end
 endmodule
