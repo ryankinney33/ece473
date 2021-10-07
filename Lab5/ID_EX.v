@@ -10,6 +10,11 @@ module ID_EX(
 	output reg [4:0] EX_RD);
 	
 	
-	
+	// write on the positive edge of the clock
+	always @(posedge clock) begin
+		EX_RS <= ID_RS;
+		EX_RT <= ID_RT;
+		EX_RD <= ID_RD;
+	end
 	
 endmodule
