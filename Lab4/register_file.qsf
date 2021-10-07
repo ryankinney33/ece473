@@ -275,8 +275,6 @@ set_global_assignment -name MIF_FILE datamem.mif
 set_global_assignment -name MIF_FILE ins.mif
 set_global_assignment -name VERILOG_FILE register_file.v
 set_global_assignment -name BDF_FILE lab4top.bdf
-set_global_assignment -name BDF_FILE reg_file_test_sim.bdf
-set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
 set_global_assignment -name QIP_FILE instructionmem.qip
 set_global_assignment -name QIP_FILE datamem.qip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
