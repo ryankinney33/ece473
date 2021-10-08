@@ -8,7 +8,7 @@ module PC(
 	// write the new value of the PC at the negative clock edge; reset to zero
 	always @(posedge clock or posedge reset) begin
 		if(reset) begin
-			PC <= 32'd0;
+			PC <= 32'h0;
 		end else begin
 			PC <= in;
 		end

@@ -6,8 +6,16 @@ module thirty_two_bit_adder(
 	output wire [31:0] sum);
 	
 	// carry outs for the ripple carry
-	wire [30:0] carries;
+	wire [31:0] carries;
+
+	generate
+		genvar i;
 	
-	// array of 32 one-bit adders
-	fa one_bit_adder [31:0] (.a(a), .b(b), .cin({carries,1'b0}), .sum(sum), .cout({1'b0,carries}));
+		for (i=0; i<31; i=i+1) begin : adderGenerate
+			fa fullAdd(.a(a[i]), .b(b[i]), .cin(carries[i]), .sum(sum[i]),.cout(carries[i+1]));
+		end
+	endgenerate
+	
+	assign carries[0] = 1'b0;
+	
 endmodule

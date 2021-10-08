@@ -78,8 +78,8 @@ module char_engine(
 
 
 	//Set and Forget stuff
-	reg [((yourname_chars*8)-1):0] yourname = "YOUR NAME";	//put your name in " "
-	parameter yourname_chars = 9;										//# of characters, including spaces/other punct.
+	reg [((yourname_chars*8)-1):0] yourname = "RYAN KINNEY";	//put your name in " "
+	parameter yourname_chars = 11;										//# of characters, including spaces/other punct.
 	
 	reg [(partname_chars*8):0] partname = "PARTNER NAME";		//partners name in " "
 	parameter partname_chars = 12;									//# of characters, including spaces/other punct.
