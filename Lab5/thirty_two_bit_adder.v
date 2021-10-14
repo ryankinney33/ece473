@@ -6,12 +6,12 @@ module thirty_two_bit_adder(
 	output wire [31:0] sum);
 	
 	// carry outs for the ripple carry
-	wire [31:0] carries;
+	wire [32:0] carries;
 
 	generate
 		genvar i;
 	
-		for (i=0; i<31; i=i+1) begin : adderGenerate
+		for (i=0; i<32; i=i+1) begin : adderGenerate
 			fa fullAdd(.a(a[i]), .b(b[i]), .cin(carries[i]), .sum(sum[i]),.cout(carries[i+1]));
 		end
 	endgenerate
