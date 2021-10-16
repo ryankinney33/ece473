@@ -16,12 +16,15 @@ module register_file(
 	
 	// 32 32 bit registers
 	reg [31:0] Registers [0:31];
+	
+	// iterator for "unrolling" the for loop
+	integer idx;
 		
 	// write on first half cycle or reset
 	always @(posedge clock or posedge reset) begin
 		if (reset == 1'b1) begin
 			// reset state; set register i to be equal to i
-			Registers[0] <= 32'd0;
+			/*Registers[0] <= 32'd0;
 			Registers[1] <= 32'd1;
 			Registers[2] <= 32'd2;
 			Registers[3] <= 32'd3;
@@ -41,25 +44,22 @@ module register_file(
 			Registers[17] <= 32'd17;
 			Registers[18] <= 32'd18;
 			Registers[19] <= 32'd19;
-			/*Registers[20] <= 32'd20;
+			Registers[20] <= 32'd20;
 			Registers[21] <= 32'd21;
 			Registers[22] <= 32'd22;
 			Registers[23] <= 32'd23;
 			Registers[24] <= 32'd24;
 			Registers[25] <= 32'd25;
-			Registers[26] <= 32'd26;*/
-			Registers[20] <= 32'd0;
-			Registers[21] <= 32'd0;
-			Registers[22] <= 32'd0;
-			Registers[23] <= 32'd0;
-			Registers[24] <= 32'd0;
-			Registers[25] <= 32'd0;
-			Registers[26] <= 32'd0;
+			Registers[26] <= 32'd26;
 			Registers[27] <= 32'd27;
 			Registers[28] <= 32'd28;
 			Registers[29] <= 32'd29;
 			Registers[30] <= 32'd30;
-			Registers[31] <= 32'd31;
+			Registers[31] <= 32'd31;*/
+			// set the value of register i to i
+			for(idx = 0; idx < 31; idx = idx+1) begin
+				Registers[idx] <= idx;
+			end
 		end else if (WriteEnable == 1'b1) begin
 				// write into register
 				Registers[write_address] <= write_data_in;
